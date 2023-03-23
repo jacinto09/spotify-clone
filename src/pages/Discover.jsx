@@ -1,24 +1,24 @@
 import React from 'react'
 import { genres } from '../assets/constants'
-import useSelectedGenre from '../hooks/useSelectedGenre'
 import { SongCard, Loader, Error } from '../components'
-import { useGetTopChartsQuery } from '../redux/services/shazamApi'
-import { useDispatch, useSelector } from 'react-redux'
+import { useGetSongsByGenreQuery } from '../redux/services/shazamApi'
+import { selectGenreListId } from '../redux/features/playerSlice'
+import { useSelector, useDispatch } from 'react-redux'
 function Discover () {
   const dispatch = useDispatch()
-  const { activeSong, isPlaying } = useSelector((state) => state.player)
-  const { data, isFetching, error } = useGetTopChartsQuery()
-  const { handleChange, selectedGenre } = useSelectedGenre()
+  const { isPlaying, activeSong, genreListId } = useSelector((state) => state.player)
+  const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'genre-global-chart-1')
   if (isFetching) return <Loader title='loading...' />
   if (error) return <Error />
+  const genreTitle = genres.find(({ value }) => value === genreListId)?.title
   return (
     <main className='flex flex-col'>
       <div className=' w-full text-white p-6 flex justify-between items-center flex-col sm:flex-row mt-4'>
-        <h2 className='font-bold text-3xl text-white text-left'>Discover {selectedGenre}</h2>
+        <h2 className='font-bold text-3xl text-white text-left mt-4 mb-10'>Discover {genreTitle || 'Pop'}</h2>
         <select
           name='selectGenre'
-          value={selectedGenre}
-          onChange={handleChange}
+          value={genreListId || 'pop'}
+          onChange={(e) => dispatch(selectGenreListId(e.target.value))}
           className='bg-black outline-none text-sm p-3 rounded-lg text-gray-300 mt-5 sm:mt-0'
         >
           {genres.map(genre =>
@@ -30,10 +30,10 @@ function Discover () {
       </div>
       <div className='w-full flex flex-wrap sm:justity-start justify-center gap-8 mt-8 '>
         {
-        (data?.tracks.map(chart => {
-          return <SongCard key={chart.key} title={chart.title} image={chart.images?.coverart} artist={chart.artists[0]?.alias} />
-        }))
-        }
+        data?.tracks.map((song, i) => (
+          <SongCard key={song.key} song={song} isPlaying={isPlaying} activeSong={activeSong} i={i} data={data} />
+        ))
+}
       </div>
     </main>
   )
