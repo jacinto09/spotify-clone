@@ -23,7 +23,7 @@ function SearchBar () {
           autocomplete='off'
           id='search-field'
           placeholder='Search'
-          onChange={(e) => handleChange}
+          onChange={handleChange}
           type='search'
           className='flex-1 bg-transparent outline-none border-none placeholder-gray-500 text-base text-white p-4'
           value={searchTerm}
