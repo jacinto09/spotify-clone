@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Sidebar, MusicPlayer, SearchBar } from './components'
-import { Discover, TopArtists, TopCharts, AroundYou, SongDetails, Search, ArtistDetails } from './pages'
+import { Discover, TopArtists, TopCharts, SongDetails, Search, ArtistDetails } from './pages'
 import { useSelector } from 'react-redux'
 
 function App () {
@@ -16,7 +16,6 @@ function App () {
               <Route path='/' element={<Discover />} />
               <Route path='/topCharts' element={<TopCharts />} />
               <Route path='/topArtists' element={<TopArtists />} />
-              <Route path='/aroundYou' element={<AroundYou />} />
               <Route path='/songDetails/:songId' element={<SongDetails />} />
               <Route path='/search/:searchTerm' element={<Search />} />
               <Route path='/artists/:artistId' element={<ArtistDetails />} />
