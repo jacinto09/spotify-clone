@@ -28,7 +28,7 @@ function Discover () {
           )}
         </select>
       </div>
-      <div className='w-full flex flex-wrap sm:justity-start justify-center gap-8 mt-8 '>
+      <div className='w-full flex flex-wrap sm:justity-start justify-center gap-8 mt-8'>
         {
         data?.tracks.map((song, i) => (
           <SongCard key={song.key} song={song} isPlaying={isPlaying} activeSong={activeSong} i={i} data={data} />
