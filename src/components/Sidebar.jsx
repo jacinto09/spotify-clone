@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaHome, FaHashtag, FaHubspot, FaUsers } from 'react-icons/fa'
+import { FaHome, FaHashtag, FaUsers } from 'react-icons/fa'
 import { RiCloseLine, RiMenuLine } from 'react-icons/ri'
 
 function Sidebar () {
@@ -16,9 +16,6 @@ function Sidebar () {
         </Link>
         <Link to='/topCharts' className='flex flex-row justify-start items-center my-8 text-sm text-gray-400 font-medium  hover:text-cyan-400'>
           <FaHashtag className='text-gray-400 hover:text-cyan-400 mr-2 text-lg' />Top Charts
-        </Link>
-        <Link to='/aroundYou' className='flex flex-row justify-start items-center my-8 text-sm text-gray-400 font-medium  hover:text-cyan-400'>
-          <FaHubspot className='text-gray-400 hover:text-cyan-400 mr-2 text-lg' />Around You
         </Link>
       </section>
       <section className='absolute md:hidden block top-6 right-3'>
@@ -37,9 +34,6 @@ function Sidebar () {
         </Link>
         <Link to='/topCharts' className='flex flex-row justify-start items-center my-8 text-sm text-gray-400 font-medium  hover:text-cyan-400'>
           <FaHashtag className='text-gray-400 hover:text-cyan-400 mr-2 text-lg' />Top Charts
-        </Link>
-        <Link to='/aroundYou' className='flex flex-row justify-start items-center my-8 text-sm text-gray-400 font-medium  hover:text-cyan-400'>
-          <FaHubspot className='text-gray-400 hover:text-cyan-400 mr-2 text-lg' />Around You
         </Link>
       </section>
     </>

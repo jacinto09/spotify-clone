@@ -15,3 +15,18 @@ export const genres = [
   { title: 'House', value: 'genre-global-chart-14' },
   { title: 'K-Pop', value: 'genre-global-chart-15' }
 ]
+
+export const countries = [
+  { title: 'España', value: 'ip-country-chart-ES' },
+  { title: 'Italy', value: 'ip-country-chart-IT' },
+  { title: 'EEUU', value: 'ip-country-chart-US' },
+  { title: 'Germany', value: 'ip-country-chart-DE' },
+  { title: 'Portugal', value: 'ip-country-chart-PT' },
+  { title: 'Argentina', value: 'ip-country-chart-AR' },
+  { title: 'Russia', value: 'ip-country-chart-RU' },
+  { title: 'Japan', value: 'ip-country-chart-JP' },
+  { title: 'France', value: 'ip-country-chart-FR' },
+  { title: 'Brazil', value: 'ip-country-chart-BR' },
+  { title: 'UK', value: 'ip-country-chart-GB' },
+  { title: 'China', value: 'ip-country-chart-CN' }
+]
