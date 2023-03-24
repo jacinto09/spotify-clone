@@ -1,8 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { Error, Loader, SongCard } from '../components'
+import { Error, Loader, SongCard, RelatedSongs } from '../components'
 import { useGetSongsByIdQuery } from '../redux/services/shazamApi'
-
 function SongDetails () {
   const { songId } = useParams()
   const { data, isFetching, error } = useGetSongsByIdQuery(songId)
@@ -21,11 +20,13 @@ function SongDetails () {
       </h1>
       <div className='text-white mt-10 p-4'>
         {data
-          ? data.sections[1]?.text.map((text, i) => {
+          ? data.sections[1]?.text?.map((text, i) => {
             return <span key={i}>{i === 0 ? text : text.toLowerCase()} </span>
           })
           : <h2>No se han encontrado letras</h2>}
+        <h1 className='text-center text-2xl mt-10'>Related Songs</h1>
       </div>
+      <RelatedSongs id={songId} />
     </main>
   )
 }
