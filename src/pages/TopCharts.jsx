@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { countries } from '../assets/constants'
 import { Error, Loader, SongCard } from '../components'
 import { useGetSongsByGenreQuery } from '../redux/services/shazamApi'
 import { selectGenreListId } from '../redux/features/playerSlice'
 function TopCharts () {
+  const divRef = useRef(null)
   const dispatch = useDispatch()
   const { isPlaying, activeSong, genreListId } = useSelector((state) => state.player)
   const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'ip-country-chart-ES')
+  useEffect(() => {
+    divRef.current?.scrollIntoView({ behavior: 'smooth' })
+  })
   if (isFetching) return <Loader title='loading...' />
   if (error) return <Error />
   const countryTitle = countries.find(({ value }) => value === genreListId)?.title
   return (
     <main className='flex flex-col'>
-      <div className=' w-full text-white p-6 flex justify-between items-center flex-col sm:flex-row mt-4'>
+      <div ref={divRef} className=' w-full text-white p-6 flex justify-between items-center flex-col sm:flex-row mt-4'>
         <h2 className='font-bold text-3xl text-white text-left mt-4 mb-10'>Top Songs {countryTitle || 'España'}</h2>
         <select
           name='selectGenre'

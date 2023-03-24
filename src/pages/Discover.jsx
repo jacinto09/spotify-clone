@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { genres } from '../assets/constants'
 import { SongCard, Loader, Error } from '../components'
 import { useGetSongsByGenreQuery } from '../redux/services/shazamApi'
 import { selectGenreListId } from '../redux/features/playerSlice'
 import { useSelector, useDispatch } from 'react-redux'
 function Discover () {
+  const divRef = useRef(null)
   const dispatch = useDispatch()
   const { isPlaying, activeSong, genreListId } = useSelector((state) => state.player)
   const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'genre-global-chart-1')
+  useEffect(() => {
+    divRef.current?.scrollIntoView({ behavior: 'smooth' })
+  })
   if (isFetching) return <Loader title='loading...' />
   if (error) return <Error />
   const genreTitle = genres.find(({ value }) => value === genreListId)?.title
   return (
     <main className='flex flex-col'>
-      <div className=' w-full text-white p-6 flex justify-between items-center flex-col sm:flex-row mt-4'>
+      <div ref={divRef} className=' w-full text-white p-6 flex justify-between items-center flex-col sm:flex-row mt-4'>
         <h2 className='font-bold text-3xl text-white text-left mt-4 mb-10'>Discover {genreTitle || 'Pop'}</h2>
         <select
           name='selectGenre'
